@@ -13,10 +13,235 @@
  *    Bruna Delazeri (Brazilian Portuguese)
  *    Adil Aliyev (Azerbaijani)
  * */
+"use strict";
+
+var DICTIONARY = {
+            "az": {
+                "search": "Təpələri axtar",
+                "nodeAttr": "Attributlar",
+                "nodes": "Təpə nöqtələri",
+                "inLinks": "Daxil olan əlaqələr:",
+                "outLinks": "Çıxan əlaqələr:",
+                "undirLinks": "İstiqamətsiz əlaqələr:",
+                "lensOn": "Linza rejiminə keç",
+                "lensOff": "Linza rejimindən çıx",
+                "edgeOn": "Tilləri göstər",
+                "edgeOff": "Tilləri gizlət",
+                "zoomIn": "Yaxınlaşdır",
+                "zoomOut": "Uzaqlaşdır",
+                "modularity_class": "Modullaşma sinfi",
+                "degree": "Dərəcə"
+            },
+            "de": {
+                "search": "Suche Knoten",
+                "nodeAttr": "Attribute",
+                "nodes": "Knoten",
+                "inLinks": "Ankommende Verknüpfung von",
+                "outLinks": "Ausgehende Verknüpfung zu",
+                "undirLinks": "Ungerichtete Verknüpfung mit",
+                "lensOn": "Vergrößerungsmodus an",
+                "lensOff": "Vergrößerungsmodus aus",
+                "edgeOn": "Kanten anzeigen",
+                "edgeOff": "Kanten verstecken",
+                "zoomIn": "Vergrößern",
+                "zoomOut": "Verkleinern",
+            },
+            "el": {
+                "search": "Αναζήτηση Κόμβων",
+                "nodeAttr": "Χαρακτηριστικά",
+                "nodes": "Κόμβοι",
+                "inLinks": "Εισερχόμενοι δεσμοί από",
+                "outLinks": "Εξερχόμενοι δεσμοί προς",
+                "undirLinks": "Ακατεύθυντοι δεσμοί με",
+                "lensOn": "Ενεργοποίηση φακού",
+                "lensOff": "Απενεργοποίηση φακού",
+                "edgeOn": "Εμφάνιση ακμών",
+                "edgeOff": "Απόκρυψη ακμών",
+                "zoomIn": "Μεγέθυνση",
+                "zoomOut": "Σμίκρυνση",
+            },
+            "en": {
+                "search": "Search nodes",
+                "nodeAttr": "Attributes",
+                "nodes": "Nodes",
+                "inLinks": "Inbound Links from:",
+                "outLinks": "Outbound Links to:",
+                "undirLinks": "Undirected links with:",
+                "lensOn": "Activate lens mode",
+                "lensOff": "Deactivate lens mode",
+                "edgeOn": "Show edges",
+                "edgeOff": "Hide edges",
+                "zoomIn": "Zoom In",
+                "zoomOut": "Zoom Out",
+            },
+            "es": {
+                "search": "Buscar un nodo",
+                "nodeAttr": "Atributos",
+                "nodes": "Nodos",
+                "inLinks": "Aristas entrantes desde :",
+                "outLinks": "Aristas salientes hacia :",
+                "undirLinks": "Aristas no dirigidas con :",
+                "lensOn": "Activar el modo lupa",
+                "lensOff": "Desactivar el modo lupa",
+                "edgeOn": "Mostrar aristas",
+                "edgeOff": "Ocultar aristas",
+                "zoomIn": "Acercar",
+                "zoomOut": "Alejar",
+                "modularity_class": "Clase de modularidad",
+                "degree": "Grado",
+                "indegree": "Grado de entrada",
+                "outdegree": "Grado de salida",
+                "weighted degree": "Grado ponderado",
+                "weighted indegree": "Grado de entrada ponderado",
+                "weighted outdegree": "Grado de salida ponderado",
+                "closnesscentrality": "Cercanía",
+                "betweenesscentrality": "Intermediación",
+                "authority": "Puntuación de autoridad (HITS)",
+                "hub": "Puntuación de hub (HITS)",
+                "pageranks": "Puntuación de PageRank"
+            },
+            "fi": {
+                "search": "Etsi solmuja",
+                "nodeAttr": "Attribuutit",
+                "nodes": "Solmut",
+                "inLinks": "Lähtevät yhteydet :",
+                "outLinks": "Tulevat yhteydet :",
+                "undirLinks": "Yhteydet :",
+                "lensOn": "Ota linssitila käyttöön",
+                "lensOff": "Poista linssitila käytöstä",
+                "edgeOn": "Näytä kaikki yhteydet",
+                "edgeOff": "Näytä vain valitun solmun yhteydet",
+                "zoomIn": "Suurenna",
+                "zoomOut": "Pienennä",
+            },
+            "fr": {
+                "search": "Rechercher un nœud",
+                "nodeAttr": "Attributs",
+                "nodes": "Nœuds",
+                "inLinks": "Liens entrants depuis :",
+                "outLinks": "Liens sortants vers :",
+                "undirLinks": "Liens non-dirigés avec :",
+                "lensOn": "Activer le mode loupe",
+                "lensOff": "Désactiver le mode loupe",
+                "edgeOn": "Afficher les sommets",
+                "edgeOff": "Cacher les sommets",
+                "zoomIn": "S'approcher",
+                "zoomOut": "S'éloigner",
+                "modularity_class": "Classe de modularité",
+                "degree": "Degré",
+                "indegree": "Demi-degré intérieur",
+                "outdegree": "Demi-degré extérieur",
+                "weighted degree": "Degré pondéré",
+                "weighted indegree": "Demi-degré intérieur pondéré",
+                "weighted outdegree": "Demi-degré extérieur pondéré",
+                "closnesscentrality": "Centralité de proximité",
+                "betweenesscentrality": "Centralité d’intermédiarité",
+                "authority": "Score d’autorité (HITS)",
+                "hub": "Score de hub (HITS)",
+                "pageranks": "Score de PageRank"
+            },
+            "it": {
+                "search": "Cerca i nodi",
+                "nodeAttr": "Attributi",
+                "nodes": "Nodi",
+                "inLinks": "Link in entrata da :",
+                "outLinks": "Link in uscita verso :",
+                "undirLinks": "Link non direzionati con :",
+                "lensOn": "Attiva la lente d’ingrandimento",
+                "lensOff": "Disattiva la lente d’ingrandimento",
+                "edgeOn": "Mostra gli spigoli",
+                "edgeOff": "Nascondi gli spigoli",
+                "zoomIn": "Zoom in avanti",
+                "zoomOut": "Zoom indietro",
+            },
+            "tr": {
+                "search": "Düğüm ara",
+                "nodeAttr": "Özellikler",
+                "nodes": "Düğümler",
+                "inLinks": "Gelen bağlantılar",
+                "outLinks": "Giden bağlantılar",
+                "undirLinks": "Yönsüz bağlantılar",
+                "lensOn": "Merceği etkinleştir",
+                "lensOff": "Merceği etkisizleştir",
+                "edgeOn": "Kenar çizgilerini göster",
+                "edgeOff": "Kenar çizgilerini gizle",
+                "zoomIn": "Yaklaştır",
+                "zoomOut": "Uzaklaştır",
+            },
+            "nl": {
+                "search": "Knooppunten doorzoeken",
+                "nodeAttr": "Attributen",
+                "nodes": "Knooppunten",
+                "inLinks": "Binnenkomende verbindingen van :",
+                "outLinks": "Uitgaande verbindingen naar :",
+                "undirLinks": "Ongerichtte verbindingen met:",
+                "lensOn": "Loepmodus activeren",
+                "lensOff": "Loepmodus deactiveren",
+                "edgeOn": "Kanten tonen",
+                "edgeOff": "Kanten verbergen",
+                "zoomIn": "Inzoomen",
+                "zoomOut": "Uitzoomen",
+            },
+            "pt": {
+                "search": "Pesquisar nós",
+                "nodeAttr": "Atributos",
+                "nodes": "Nós",
+                "inLinks": "Ligações de entrada",
+                "outLinks": "Ligações de saída",
+                "undirLinks": "Ligações sem direção",
+                "lensOn": "Ativar modo lente",
+                "lensOff": "Ativar modo lente",
+                "edgeOn": "Mostrar arestas",
+                "edgeOff": "Esconder arestas",
+                "zoomIn": "Aumentar zoom",
+                "zoomOut": "Diminuir zoom",
+            }
+        };
+
+function GEXFjs(obj) {
+    
+    // Setting default language
+    if (obj.lang === false) {
+      obj.lang = "en";
+    } 
+    
+    // Filling undefined
+    this.lensRadius   = obj.lensRadius;
+    this.lensGamma    = obj.lensGamma;
+    this.graphZone    = obj.graphZone;
+    this.oldGraphZone = obj.oldGraphZone;
+    this.params       = obj.params;
+    this.oldParams    = obj.oldParams;
+    this.minZoom      = obj.minZoom;
+    this.maxZoom      = obj.maxZoom;
+    this.overviewWidth  = obj.overviewWidth;
+    this.overviewHeight = obj.overviewHeight;
+    this.baseWidth      = obj.baseWidth;
+    this.baseHeight     = obj.baseHeight;
+    this.overviewScale  = obj.overviewScale;
+    this.totalScroll    = obj.totalScroll;
+    this.autoCompletePosition = obj.autoCompletePosition;
+    this.i18n = obj.i18n;
+    this.lang = obj.lang;
+    
+    this.getLang = (function() {
+      console.log(this.params.languaje);
+    });
+    
+    this.strLang = (function(_str) {
+      return DICTIONARY[this.lang][_str.replace("_", " ")];
+    });
+    
+    
+        /***function strLang(_str) {
+        var _l = GexfJS.i18n[GexfJS.lang];
+        return (_l[_str] ? _l[_str] : (GexfJS.i18n["en"][_str] ? GexfJS.i18n["en"][_str] : _str.replace("_", " ")));
+    }***/
+  }
 
 (function() {
 
-    var GexfJS = {
+    var GexfJS = new GEXFjs({
         lensRadius: 200,
         lensGamma: 0.5,
         graphZone: {
@@ -29,7 +254,9 @@
             centreY: 350,
             activeNode: -1,
             currentNode: -1,
-            isMoving: false
+            isMoving: false,
+            language: "",
+            graphFile: ""
         },
         oldParams: {},
         minZoom: -3,
@@ -38,7 +265,7 @@
         overviewHeight: 175,
         baseWidth: 800,
         baseHeight: 700,
-        overviewScale: .25,
+        overviewScale: 0.25,
         totalScroll: 0,
         autoCompletePosition: 0,
         i18n: {
@@ -223,8 +450,13 @@
                 "zoomOut": "Diminuir zoom",
             }
         },
-        lang: "en"
-    };
+        lang: "en"}
+    );
+
+    // Resizing variables
+    var _xmin, _xmax, _ymin, _ymax, _marge;
+    var _coordt;
+    var _r;
 
     var timedict = {}
     function measureTime(key) {
@@ -249,10 +481,10 @@
         }, 200);
     }
 
-    function strLang(_str) {
+    /***function strLang(_str) {
         var _l = GexfJS.i18n[GexfJS.lang];
         return (_l[_str] ? _l[_str] : (GexfJS.i18n["en"][_str] ? GexfJS.i18n["en"][_str] : _str.replace("_", " ")));
-    }
+    }***/
 
     function replaceURLWithHyperlinks(text) {
         if (GexfJS.params.replaceUrls) {
@@ -292,7 +524,7 @@
                 .append($('<div>').addClass('largepill').css('background', _d.B))
                 .append($('<span>').text(_d.l))
                 .appendTo(_html);
-            $('<h4>').text(strLang("nodeAttr")).appendTo(_html);
+            $('<h4>').text(GexfJS.strLang("nodeAttr")).appendTo(_html);
             _ul.appendTo(_html);
             if (GexfJS.params.showId) {
                 var _li = $("<li>");
@@ -300,11 +532,12 @@
                 $("<span>").text(_d.id).appendTo(_li);
                 _li.appendTo(_ul);
             }
-            for (var i = 0, l = _d.a.length; i < l; i++) {
+            var i, l;
+            for (i = 0, l = _d.a.length; i < l; i++) {
                 var attr = _d.a[i];
                 var _li = $("<li>");
                 var attrkey = GexfJS.graph.attributes[attr[0]];
-                $("<b>").text(strLang(attrkey) + ": ").appendTo(_li);
+                $("<b>").text(GexfJS.strLang(attrkey) + ": ").appendTo(_li);
                 if (attrkey === 'image') {
                     $('<br>').appendTo(_li);
                     $('<img>').attr("src", attr[1]).appendTo(_li).addClass("attrimg");
@@ -317,9 +550,10 @@
                 _str_out = [],
                 _str_undir = [];
             GexfJS.graph.edgeList.forEach(function (_e) {
+                var _n, _li;
                 if (_e.t == _nodeIndex) {
-                    var _n = GexfJS.graph.nodeList[_e.s];
-                    var _li = $("<li>");
+                    _n = GexfJS.graph.nodeList[_e.s];
+                    _li = $("<li>");
                     $("<div>").addClass("smallpill").css("background", _n.B).appendTo(_li);
                     $("<a>")
                         .text(_n.l)
@@ -345,8 +579,8 @@
                     }
                 }
                 if (_e.s == _nodeIndex) {
-                    var _n = GexfJS.graph.nodeList[_e.t];
-                    var _li = $("<li>");
+                    _n = GexfJS.graph.nodeList[_e.t];
+                    _li = $("<li>");
                     $("<div>").addClass("smallpill").css("background", _n.B).appendTo(_li);
                     $("<a>")
                         .text(_n.l)
@@ -373,15 +607,15 @@
                 }
             });
             if (_str_in.length) {
-                $('<h4>').text(strLang("inLinks")).appendTo(_html);
+                $('<h4>').text(GexfJS.strLang("inLinks")).appendTo(_html);
                 $('<ul>').html(_str_in).appendTo(_html);
             }
             if (_str_out.length) {
-                $('<h4>').text(strLang("outLinks")).appendTo(_html);
+                $('<h4>').text(GexfJS.strLang("outLinks")).appendTo(_html);
                 $('<ul>').html(_str_out).appendTo(_html);
             }
             if (_str_undir.length) {
-                $('<h4>').text(strLang("undirLinks")).appendTo(_html);
+                $('<h4>').text(GexfJS.strLang("undirLinks")).appendTo(_html);
                 $('<ul>').html(_str_undir).appendTo(_html);
             }
             $("#leftcontent").html(_html);
@@ -676,7 +910,7 @@
                         edgeList: [],
                         attributes: {},
                     };
-                    var _xmin = 1e9, _xmax = -1e9, _ymin = 1e9, _ymax = -1e9; _marge = 30;
+                    _xmin = 1e9, _xmax = -1e9, _ymin = 1e9, _ymax = -1e9; _marge = 30;
                     $(_nodes).each(function () {
                         var _n = $(this),
                             _pos = _n.find("viz\\:position,position"),
@@ -903,6 +1137,10 @@
     }
 
     function traceMap() {
+      
+        // Variable declaration
+        var _r, _x, _y, _w, _h;
+      
         updateWorkspaceBounds();
         if (!GexfJS.graph) {
             return;
@@ -951,7 +1189,7 @@
             _d.visible = (GexfJS.params.currentNode == -1 || i == _centralNode || GexfJS.params.showEdges);
         }
 
-        var _tagsMisEnValeur = [];
+        var _tagsMisEnValeur = [], _coulTag;
 
         if (_centralNode != -1) {
             _tagsMisEnValeur = [_centralNode];
@@ -1063,8 +1301,9 @@
             GexfJS.ctxGraphe.fillText(_dnc.l, _dnc.real_coords.x, _dnc.real_coords.y);
         }
 
+        
         GexfJS.ctxMini.putImageData(GexfJS.imageMini, 0, 0);
-        var _r = GexfJS.overviewScale / GexfJS.globalScale,
+        _r = GexfJS.overviewScale / GexfJS.globalScale,
             _x = - _r * GexfJS.decalageX,
             _y = - _r * GexfJS.decalageY,
             _w = _r * GexfJS.graphZone.width,
@@ -1118,7 +1357,7 @@
             GexfJS.autoCompletePosition = 0;
             _ac.html(
                 $('<div>').append(
-                    $('<h4>').text(strLang("nodes"))
+                    $('<h4>').text(GexfJS.strLang("nodes"))
                 ).append(_acContent)
             );
         }
@@ -1128,10 +1367,10 @@
 
     function updateButtonStates() {
         $("#lensButton").attr("class", GexfJS.params.useLens ? "" : "off")
-            .attr("title", strLang(GexfJS.params.showEdges ? "lensOff" : "lensOn"));
+            .attr("title", GexfJS.strLang(GexfJS.params.showEdges ? "lensOff" : "lensOn"));
 
         $("#edgesButton").attr("class", GexfJS.params.showEdges ? "" : "off")
-            .attr("title", strLang(GexfJS.params.showEdges ? "edgeOff" : "edgeOn"));
+            .attr("title", GexfJS.strLang(GexfJS.params.showEdges ? "edgeOff" : "edgeOn"));
     }
 
     GexfJS.setParams = function setParams(paramlist) {
@@ -1248,13 +1487,13 @@
             $("#zoomSlider").slider("value", GexfJS.params.zoomLevel);
             return false;
         })
-            .attr("title", strLang("zoomOut"));
+            .attr("title", GexfJS.strLang("zoomOut"));
         $("#zoomPlusButton").click(function () {
             GexfJS.params.zoomLevel = Math.min(GexfJS.maxZoom, GexfJS.params.zoomLevel + 1);
             $("#zoomSlider").slider("value", GexfJS.params.zoomLevel);
             return false;
         })
-            .attr("title", strLang("zoomIn"));
+            .attr("title", GexfJS.strLang("zoomIn"));
         $(document).click(function (evt) {
             $("#autocomplete").slideUp();
         });
