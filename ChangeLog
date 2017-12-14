@@ -1,0 +1,10 @@
+2017-12-13  George G. Vega Yon <g.vegayon@gmail.com>:
+
+	* js/gexfjs.js: A bunch of changes:
+		- Created a constructor GEXFjs with methods to access/edit data.
+		- Language Defs as DICTIONARY.
+		- config.js no longer needed.
+		- Overall function now modular. Needs to be called to render 
+		  the graph.
+		- Support for XML passed as string. This is important for
+		  rgexf (so you don't need a gexf file).

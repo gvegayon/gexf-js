@@ -15,6 +15,7 @@
  * */
 "use strict";
 
+// The dictionarys. This is used for the UI
 var DICTIONARY = {
             "az": {
                 "search": "Təpələri axtar",
@@ -198,50 +199,7 @@ var DICTIONARY = {
             }
         };
 
-function GEXFjs(obj) {
-    
-    // Setting default language
-    if (obj.lang === false) {
-      obj.lang = "en";
-    } 
-    
-    // Filling undefined
-    this.lensRadius   = obj.lensRadius;
-    this.lensGamma    = obj.lensGamma;
-    this.graphZone    = obj.graphZone;
-    this.oldGraphZone = obj.oldGraphZone;
-    this.params       = obj.params;
-    this.oldParams    = obj.oldParams;
-    this.minZoom      = obj.minZoom;
-    this.maxZoom      = obj.maxZoom;
-    this.overviewWidth  = obj.overviewWidth;
-    this.overviewHeight = obj.overviewHeight;
-    this.baseWidth      = obj.baseWidth;
-    this.baseHeight     = obj.baseHeight;
-    this.overviewScale  = obj.overviewScale;
-    this.totalScroll    = obj.totalScroll;
-    this.autoCompletePosition = obj.autoCompletePosition;
-    this.i18n = obj.i18n;
-    this.lang = obj.lang;
-    
-    this.getLang = (function() {
-      console.log(this.params.languaje);
-    });
-    
-    this.strLang = (function(_str) {
-      return DICTIONARY[this.lang][_str.replace("_", " ")];
-    });
-    
-    
-        /***function strLang(_str) {
-        var _l = GexfJS.i18n[GexfJS.lang];
-        return (_l[_str] ? _l[_str] : (GexfJS.i18n["en"][_str] ? GexfJS.i18n["en"][_str] : _str.replace("_", " ")));
-    }***/
-  }
-
-(function() {
-
-    var GexfJS = new GEXFjs({
+var GEXFjsDefaults = {
         lensRadius: 200,
         lensGamma: 0.5,
         graphZone: {
@@ -268,205 +226,293 @@ function GEXFjs(obj) {
         overviewScale: 0.25,
         totalScroll: 0,
         autoCompletePosition: 0,
-        i18n: {
-            "az": {
-                "search": "Təpələri axtar",
-                "nodeAttr": "Attributlar",
-                "nodes": "Təpə nöqtələri",
-                "inLinks": "Daxil olan əlaqələr:",
-                "outLinks": "Çıxan əlaqələr:",
-                "undirLinks": "İstiqamətsiz əlaqələr:",
-                "lensOn": "Linza rejiminə keç",
-                "lensOff": "Linza rejimindən çıx",
-                "edgeOn": "Tilləri göstər",
-                "edgeOff": "Tilləri gizlət",
-                "zoomIn": "Yaxınlaşdır",
-                "zoomOut": "Uzaqlaşdır",
-                "modularity_class": "Modullaşma sinfi",
-                "degree": "Dərəcə"
-            },
-            "de": {
-                "search": "Suche Knoten",
-                "nodeAttr": "Attribute",
-                "nodes": "Knoten",
-                "inLinks": "Ankommende Verknüpfung von",
-                "outLinks": "Ausgehende Verknüpfung zu",
-                "undirLinks": "Ungerichtete Verknüpfung mit",
-                "lensOn": "Vergrößerungsmodus an",
-                "lensOff": "Vergrößerungsmodus aus",
-                "edgeOn": "Kanten anzeigen",
-                "edgeOff": "Kanten verstecken",
-                "zoomIn": "Vergrößern",
-                "zoomOut": "Verkleinern",
-            },
-            "el": {
-                "search": "Αναζήτηση Κόμβων",
-                "nodeAttr": "Χαρακτηριστικά",
-                "nodes": "Κόμβοι",
-                "inLinks": "Εισερχόμενοι δεσμοί από",
-                "outLinks": "Εξερχόμενοι δεσμοί προς",
-                "undirLinks": "Ακατεύθυντοι δεσμοί με",
-                "lensOn": "Ενεργοποίηση φακού",
-                "lensOff": "Απενεργοποίηση φακού",
-                "edgeOn": "Εμφάνιση ακμών",
-                "edgeOff": "Απόκρυψη ακμών",
-                "zoomIn": "Μεγέθυνση",
-                "zoomOut": "Σμίκρυνση",
-            },
-            "en": {
-                "search": "Search nodes",
-                "nodeAttr": "Attributes",
-                "nodes": "Nodes",
-                "inLinks": "Inbound Links from:",
-                "outLinks": "Outbound Links to:",
-                "undirLinks": "Undirected links with:",
-                "lensOn": "Activate lens mode",
-                "lensOff": "Deactivate lens mode",
-                "edgeOn": "Show edges",
-                "edgeOff": "Hide edges",
-                "zoomIn": "Zoom In",
-                "zoomOut": "Zoom Out",
-            },
-            "es": {
-                "search": "Buscar un nodo",
-                "nodeAttr": "Atributos",
-                "nodes": "Nodos",
-                "inLinks": "Aristas entrantes desde :",
-                "outLinks": "Aristas salientes hacia :",
-                "undirLinks": "Aristas no dirigidas con :",
-                "lensOn": "Activar el modo lupa",
-                "lensOff": "Desactivar el modo lupa",
-                "edgeOn": "Mostrar aristas",
-                "edgeOff": "Ocultar aristas",
-                "zoomIn": "Acercar",
-                "zoomOut": "Alejar",
-                "modularity_class": "Clase de modularidad",
-                "degree": "Grado",
-                "indegree": "Grado de entrada",
-                "outdegree": "Grado de salida",
-                "weighted degree": "Grado ponderado",
-                "weighted indegree": "Grado de entrada ponderado",
-                "weighted outdegree": "Grado de salida ponderado",
-                "closnesscentrality": "Cercanía",
-                "betweenesscentrality": "Intermediación",
-                "authority": "Puntuación de autoridad (HITS)",
-                "hub": "Puntuación de hub (HITS)",
-                "pageranks": "Puntuación de PageRank"
-            },
-            "fi": {
-                "search": "Etsi solmuja",
-                "nodeAttr": "Attribuutit",
-                "nodes": "Solmut",
-                "inLinks": "Lähtevät yhteydet :",
-                "outLinks": "Tulevat yhteydet :",
-                "undirLinks": "Yhteydet :",
-                "lensOn": "Ota linssitila käyttöön",
-                "lensOff": "Poista linssitila käytöstä",
-                "edgeOn": "Näytä kaikki yhteydet",
-                "edgeOff": "Näytä vain valitun solmun yhteydet",
-                "zoomIn": "Suurenna",
-                "zoomOut": "Pienennä",
-            },
-            "fr": {
-                "search": "Rechercher un nœud",
-                "nodeAttr": "Attributs",
-                "nodes": "Nœuds",
-                "inLinks": "Liens entrants depuis :",
-                "outLinks": "Liens sortants vers :",
-                "undirLinks": "Liens non-dirigés avec :",
-                "lensOn": "Activer le mode loupe",
-                "lensOff": "Désactiver le mode loupe",
-                "edgeOn": "Afficher les sommets",
-                "edgeOff": "Cacher les sommets",
-                "zoomIn": "S'approcher",
-                "zoomOut": "S'éloigner",
-                "modularity_class": "Classe de modularité",
-                "degree": "Degré",
-                "indegree": "Demi-degré intérieur",
-                "outdegree": "Demi-degré extérieur",
-                "weighted degree": "Degré pondéré",
-                "weighted indegree": "Demi-degré intérieur pondéré",
-                "weighted outdegree": "Demi-degré extérieur pondéré",
-                "closnesscentrality": "Centralité de proximité",
-                "betweenesscentrality": "Centralité d’intermédiarité",
-                "authority": "Score d’autorité (HITS)",
-                "hub": "Score de hub (HITS)",
-                "pageranks": "Score de PageRank"
-            },
-            "it": {
-                "search": "Cerca i nodi",
-                "nodeAttr": "Attributi",
-                "nodes": "Nodi",
-                "inLinks": "Link in entrata da :",
-                "outLinks": "Link in uscita verso :",
-                "undirLinks": "Link non direzionati con :",
-                "lensOn": "Attiva la lente d’ingrandimento",
-                "lensOff": "Disattiva la lente d’ingrandimento",
-                "edgeOn": "Mostra gli spigoli",
-                "edgeOff": "Nascondi gli spigoli",
-                "zoomIn": "Zoom in avanti",
-                "zoomOut": "Zoom indietro",
-            },
-            "tr": {
-                "search": "Düğüm ara",
-                "nodeAttr": "Özellikler",
-                "nodes": "Düğümler",
-                "inLinks": "Gelen bağlantılar",
-                "outLinks": "Giden bağlantılar",
-                "undirLinks": "Yönsüz bağlantılar",
-                "lensOn": "Merceği etkinleştir",
-                "lensOff": "Merceği etkisizleştir",
-                "edgeOn": "Kenar çizgilerini göster",
-                "edgeOff": "Kenar çizgilerini gizle",
-                "zoomIn": "Yaklaştır",
-                "zoomOut": "Uzaklaştır",
-            },
-            "nl": {
-                "search": "Knooppunten doorzoeken",
-                "nodeAttr": "Attributen",
-                "nodes": "Knooppunten",
-                "inLinks": "Binnenkomende verbindingen van :",
-                "outLinks": "Uitgaande verbindingen naar :",
-                "undirLinks": "Ongerichtte verbindingen met:",
-                "lensOn": "Loepmodus activeren",
-                "lensOff": "Loepmodus deactiveren",
-                "edgeOn": "Kanten tonen",
-                "edgeOff": "Kanten verbergen",
-                "zoomIn": "Inzoomen",
-                "zoomOut": "Uitzoomen",
-            },
-            "pt": {
-                "search": "Pesquisar nós",
-                "nodeAttr": "Atributos",
-                "nodes": "Nós",
-                "inLinks": "Ligações de entrada",
-                "outLinks": "Ligações de saída",
-                "undirLinks": "Ligações sem direção",
-                "lensOn": "Ativar modo lente",
-                "lensOff": "Ativar modo lente",
-                "edgeOn": "Mostrar arestas",
-                "edgeOff": "Esconder arestas",
-                "zoomIn": "Aumentar zoom",
-                "zoomOut": "Diminuir zoom",
-            }
-        },
-        lang: "en"}
-    );
+        lang: "en"
+    };
+/***
+ * Default Options
+ * @param graphFile Relative path to a GEXF/JSON file.
+ * @param graphXMLString String containing a GEXF file to be parsed.
+ */
+var GEXFjsDefaultParams = {
+  graphFile : "",
+  graphXMLString : undefined,
+  showEdges : true,
+  useLens : false,
+  zoomLevel : 0,
+  curvedEdges : true,
+  edgeWidthFactor : 1,
+  minEdgeWidth : 1,
+  maxEdgeWidth : 50,
+  textDisplayThreshold: 9,
+  nodeSizeFactor : 1,
+  replaceUrls : true,
+  showEdgeWeight : true,
+  showEdgeLabel : true,
+  sortNodeAttributes: true,
+  showId : true,
+  showEdgeArrow : true,
+  language: false,
+};
 
+// Function to measure reading time
+var TIMEDIC = {};
+function measureTime(key) {
+    if (TIMEDIC[key]) {
+        console.log(key + " took " + (Date.now() - TIMEDIC[key])/1000 + "s");
+        delete TIMEDIC[key];
+    } else {
+        TIMEDIC[key] = Date.now();
+    }
+}
+
+/***
+ * Parses an XML/JSON object
+ * @param data An XML/JSON object.
+ * @param obj A GEXFjs object.
+ * @param isJson Logical.
+ */ 
+function parseGEXF(data, obj, isJson) {
+  
+  // Variables definition
+  var _xmin, _xmax, _ymin, _ymax, _marge;
+  
+  measureTime("Loading graph from network");
+  measureTime("Pre-processing graph");
+  
+  // Reading from json data
+  if (isJson) {
+    
+      obj.graph = data;
+      obj.graph.indexOfLabels = obj.graph.nodeList.map(function (_d) {
+          return _d.l.toLowerCase();
+      });
+    
+  } else {
+      
+      var _g = $(data).find("graph"),
+          _nodes = _g.children().filter("nodes").children(),
+          _edges = _g.children().filter("edges").children();
+      obj.graph = {
+          directed: (_g.attr("defaultedgetype") == "directed"),
+          nodeList: [],
+          indexOfLabels: [],
+          edgeList: [],
+          attributes: {},
+      };
+      _xmin = 1e9, _xmax = -1e9, _ymin = 1e9, _ymax = -1e9; _marge = 30;
+      $(_nodes).each(function () {
+          var _n = $(this),
+              _pos = _n.find("viz\\:position,position"),
+              _x = _pos.attr("x"),
+              _y = _pos.attr("y");
+          _xmin = Math.min(_x, _xmin);
+          _xmax = Math.max(_x, _xmax);
+          _ymin = Math.min(_y, _ymin);
+          _ymax = Math.max(_y, _ymax);
+      });
+
+      var _scale = Math.min((obj.baseWidth - _marge) / (_xmax - _xmin), (obj.baseHeight - _marge) / (_ymax - _ymin));
+      var _deltax = (obj.baseWidth - _scale * (_xmin + _xmax)) / 2;
+      var _deltay = (obj.baseHeight - _scale * (_ymin + _ymax)) / 2;
+      var nodeIndexById = [];
+
+      $(_nodes).each(function () {
+          var _n = $(this),
+              _id = _n.attr("id"),
+              _label = _n.attr("label") || _id,
+              _pos = _n.find("viz\\:position,position"),
+              _d = {
+                  id: _id,
+                  l: _label,
+                  x: _deltax + _scale * _pos.attr("x"),
+                  y: _deltay - _scale * _pos.attr("y"),
+                  r: _scale * _n.find("viz\\:size,size").attr("value"),
+              },
+              _col = _n.find("viz\\:color,color"),
+              _r = _col.attr("r"),
+              _g = _col.attr("g"),
+              _b = _col.attr("b"),
+              _attr = _n.find("attvalue");
+          _d.rgb = [_r, _g, _b];
+          _d.B = "rgba(" + _r + "," + _g + "," + _b + ",.7)";
+          _d.G = "rgba(" + Math.floor(84 + 0.33 * _r) + "," + Math.floor(84 + 0.33 * _g) + "," + Math.floor(84 + 0.33 * _b) + ",.5)";
+          _d.a = [];
+          $(_attr).each(function () {
+              var _a = $(this),
+                  _for = _a.attr("for");
+              _d.a.push([
+                  _for ? _for : 'attribute_' + _a.attr("id"),
+                  _a.attr("value")
+              ]);
+              obj.graph.attributes[_for] = _for;
+          });
+          if (obj.params.sortNodeAttributes) {
+              _d.a.sort(function (a, b) {
+                  return (a[0] < b[0] ? -1 : (a[0] > b[0] ? 1 : 0));
+              });
+          }
+          obj.graph.nodeList.push(_d);
+          nodeIndexById.push(_d.id);
+          obj.graph.indexOfLabels.push(_d.l.toLowerCase());
+      });
+
+      $(_edges).each(function () {
+          var _e = $(this),
+              _sid = _e.attr("source"),
+              _six = nodeIndexById.indexOf(_sid),
+              _tid = _e.attr("target"),
+              _tix = nodeIndexById.indexOf(_tid),
+              _w = _e.find('attvalue[for="weight"]').attr('value') || _e.attr('weight'),
+              _col = _e.find("viz\\:color,color"),
+              _directed = obj.graph.directed;
+          if (_e.attr("type") == "directed") {
+              _directed = true;
+          }
+          if (_e.attr("type") == "undirected") {
+              _directed = false;
+          }
+          if (_col.length) {
+              var _r = _col.attr("r"),
+                  _g = _col.attr("g"),
+                  _b = _col.attr("b");
+          } else {
+              var _scol = obj.graph.nodeList[_six].rgb;
+              if (_directed) {
+                  var _r = _scol[0],
+                      _g = _scol[1],
+                      _b = _scol[2];
+              } else {
+                  var _tcol = obj.graph.nodeList[_tix].rgb,
+                      _r = Math.floor(.5 * _scol[0] + .5 * _tcol[0]),
+                      _g = Math.floor(.5 * _scol[1] + .5 * _tcol[1]),
+                      _b = Math.floor(.5 * _scol[2] + .5 * _tcol[2]);
+              }
+          }
+          obj.graph.edgeList.push({
+              s: _six,
+              t: _tix,
+              W: Math.max(obj.params.minEdgeWidth, Math.min(obj.params.maxEdgeWidth, (_w || 1))) * _scale,
+              w: parseFloat(_w || 0),
+              C: "rgba(" + _r + "," + _g + "," + _b + ",.7)",
+              l: _e.attr("label") || "",
+              d: _directed
+          });
+      });
+  }
+  measureTime("Pre-processing graph");
+
+  obj.ctxMini.clearRect(0, 0, obj.overviewWidth, obj.overviewHeight);
+
+  obj.graph.nodeList.forEach(function (_d) {
+      obj.ctxMini.fillStyle = _d.B;
+      obj.ctxMini.beginPath();
+      obj.ctxMini.arc(_d.x * obj.overviewScale, _d.y * obj.overviewScale, _d.r * obj.overviewScale + 1, 0, Math.PI * 2, true);
+      obj.ctxMini.closePath();
+      obj.ctxMini.fill();
+  });
+
+  obj.imageMini = obj.ctxMini.getImageData(0, 0, obj.overviewWidth, obj.overviewHeight);
+      
+  }
+
+function GEXFjs(obj) {
+  
+  // It can be set as empty
+  if (typeof obj === "undefined") {
+    obj = {};
+  }
+
+  // Filling undefined
+  this.lensRadius   = obj.lensRadius;
+  this.lensGamma    = obj.lensGamma;
+  this.graphZone    = obj.graphZone;
+  this.oldGraphZone = obj.oldGraphZone;
+  this.params       = obj.params;
+  this.oldParams    = obj.oldParams;
+  this.minZoom      = obj.minZoom;
+  this.maxZoom      = obj.maxZoom;
+  this.overviewWidth  = obj.overviewWidth;
+  this.overviewHeight = obj.overviewHeight;
+  this.baseWidth      = obj.baseWidth;
+  this.baseHeight     = obj.baseHeight;
+  this.overviewScale  = obj.overviewScale;
+  this.totalScroll    = obj.totalScroll;
+  this.autoCompletePosition = obj.autoCompletePosition;
+  this.lang = obj.lang;
+  
+  // Checking undefined
+  var d;
+  for (d in GEXFjsDefaults) {
+    if (typeof this[d] === "undefined") {
+      this[d] = GEXFjsDefaults[d];
+    }
+  }
+  
+  for (d in GEXFjsDefaultParams) {
+    if (typeof this.params[d] === "undefined") {
+      this.params[d] = GEXFjsDefaultParams[d];
+    }
+  }
+  
+  // Setting default language
+  this.lang = (
+    typeof this.params.language != "undefined" && this.params.language
+    ? this.params.language
+    : (
+      navigator.language
+      ? navigator.language.substr(0, 2).toLowerCase()
+      : (
+        navigator.userLanguage
+        ? navigator.userLanguage.substr(0, 2).toLowerCase()
+        : "en"
+      )
+    )
+  );
+  
+  this.lang = (DICTIONARY[this.lang] ? this.lang : "en");
+  
+  this.strLang = (function(_str) {
+    return DICTIONARY[this.lang][_str.replace("_", " ")];
+  });
+  
+  // This function modifies the parameters (replaces the one defined)
+  // on the fly in previous versions.
+  this.setParams = (function(x) {
+    var d;
+    for (d in x) {
+      
+      // If language changes, then this must change as well
+      if (d === "language") {
+        this.setLanguage(x[d]);
+      }
+      
+      this.params[d] = x[d];
+    }
+  });
+  
+  this.setLanguage = (function(lan) {
+    // Is there any support for this language?
+    if (typeof DICTIONARY[lan] === "undefined") {
+      window.alert(
+        "The languge '" + lan + "' is not available yet. Please " + 
+        " check your configuration parameters."
+        );
+    } else {
+      this.lan = lan;
+    }
+  });
+  
+}
+
+/***
+ * Renders a GEXF object
+ */
+function renderGEXF(GexfJS) {
+  
     // Resizing variables
     var _xmin, _xmax, _ymin, _ymax, _marge;
     var _coordt;
     var _r;
-
-    var timedict = {}
-    function measureTime(key) {
-        if (timedict[key]) {
-            console.log(key + " took " + (Date.now() - timedict[key])/1000 + "s");
-            delete timedict[key]
-        } else {
-            timedict[key] = Date.now()
-        }
-    }
 
     var movingTO = null;
 
@@ -480,11 +526,6 @@ function GEXFjs(obj) {
             GexfJS.params.isMoving = false;
         }, 200);
     }
-
-    /***function strLang(_str) {
-        var _l = GexfJS.i18n[GexfJS.lang];
-        return (_l[_str] ? _l[_str] : (GexfJS.i18n["en"][_str] ? GexfJS.i18n["en"][_str] : _str.replace("_", " ")));
-    }***/
 
     function replaceURLWithHyperlinks(text) {
         if (GexfJS.params.replaceUrls) {
@@ -526,17 +567,19 @@ function GEXFjs(obj) {
                 .appendTo(_html);
             $('<h4>').text(GexfJS.strLang("nodeAttr")).appendTo(_html);
             _ul.appendTo(_html);
+            
+            var _li, attr, attrkey;
             if (GexfJS.params.showId) {
-                var _li = $("<li>");
+                _li = $("<li>");
                 $("<b>").text("id: ").appendTo(_li);
                 $("<span>").text(_d.id).appendTo(_li);
                 _li.appendTo(_ul);
             }
             var i, l;
             for (i = 0, l = _d.a.length; i < l; i++) {
-                var attr = _d.a[i];
-                var _li = $("<li>");
-                var attrkey = GexfJS.graph.attributes[attr[0]];
+                attr = _d.a[i];
+                _li = $("<li>");
+                attrkey = GexfJS.graph.attributes[attr[0]];
                 $("<b>").text(GexfJS.strLang(attrkey) + ": ").appendTo(_li);
                 if (attrkey === 'image') {
                     $('<br>').appendTo(_li);
@@ -642,7 +685,8 @@ function GEXFjs(obj) {
         GexfJS.graphZone.height = _elZC.height();
         GexfJS.areParamsIdentical = true;
 
-        for (var i in GexfJS.graphZone) {
+        var i;
+        for (i in GexfJS.graphZone) {
             GexfJS.areParamsIdentical = GexfJS.areParamsIdentical && (GexfJS.graphZone[i] == GexfJS.oldGraphZone[i]);
         }
         if (!GexfJS.areParamsIdentical) {
@@ -656,7 +700,7 @@ function GEXFjs(obj) {
                     width: GexfJS.graphZone.width + "px",
                     height: GexfJS.graphZone.height + "px"
                 });
-            for (var i in GexfJS.graphZone) {
+            for (i in GexfJS.graphZone) {
                 GexfJS.oldGraphZone[i] = GexfJS.graphZone[i];
             }
         }
@@ -669,7 +713,7 @@ function GEXFjs(obj) {
             GexfJS.lastMouse = {
                 x: coords.pageX,
                 y: coords.pageY
-            }
+            };
             GexfJS.dragOn = true;
             GexfJS.mouseHasMoved = false;
         } else {
@@ -819,27 +863,41 @@ function GEXFjs(obj) {
     function onGraphScroll(evt, delta) {
         GexfJS.totalScroll += delta;
         if (Math.abs(GexfJS.totalScroll) >= 1) {
+          
+            var _el, _off, _deltaX, _deltaY;
+            
             if (GexfJS.totalScroll < 0) {
+              
                 if (GexfJS.params.zoomLevel > GexfJS.minZoom) {
+                    
                     GexfJS.params.zoomLevel--;
-                    var _el = (typeof ($(this).offset()) == 'object') ? $(this) : $('#carte'),
-                        _off = _el.offset(),
-                        _deltaX = evt.pageX - _el.width() / 2 - _off.left,
-                        _deltaY = evt.pageY - _el.height() / 2 - _off.top;
+                    
+                    _el = (typeof ($(this).offset()) == 'object') ? $(this) : $('#carte'),
+                    _off = _el.offset(),
+                    _deltaX = evt.pageX - _el.width() / 2 - _off.left,
+                    _deltaY = evt.pageY - _el.height() / 2 - _off.top;
+                        
                     GexfJS.params.centreX -= (Math.SQRT2 - 1) * _deltaX / GexfJS.globalScale;
                     GexfJS.params.centreY -= (Math.SQRT2 - 1) * _deltaY / GexfJS.globalScale;
+                    
                     $("#zoomSlider").slider("value", GexfJS.params.zoomLevel);
                 }
+                
             } else {
+              
                 if (GexfJS.params.zoomLevel < GexfJS.maxZoom) {
+                    
                     GexfJS.params.zoomLevel++;
                     GexfJS.globalScale = Math.pow(Math.SQRT2, GexfJS.params.zoomLevel);
-                    var _el = (typeof ($(this).offset()) == 'object') ? $(this) : $('#carte'),
-                        _off = _el.offset(),
-                        _deltaX = evt.pageX - _el.width() / 2 - _off.left,
-                        _deltaY = evt.pageY - _el.height() / 2 - _off.top;
+                    
+                    _el = (typeof ($(this).offset()) == 'object') ? $(this) : $('#carte'),
+                    _off = _el.offset(),
+                    _deltaX = evt.pageX - _el.width() / 2 - _off.left,
+                    _deltaY = evt.pageY - _el.height() / 2 - _off.top;
+                    
                     GexfJS.params.centreX += (Math.SQRT2 - 1) * _deltaX / GexfJS.globalScale;
                     GexfJS.params.centreY += (Math.SQRT2 - 1) * _deltaY / GexfJS.globalScale;
+                    
                     $("#zoomSlider").slider("value", GexfJS.params.zoomLevel);
                 }
             }
@@ -879,6 +937,11 @@ function GEXFjs(obj) {
         loadGraph();
     }
 
+    /***
+     * Function to load the network
+     * 
+     * Currently only JSON, GEXF files and XML (GEXF) objects are supported
+     */ 
     function loadGraph() {
 
         var url = (document.location.hash.length > 1 ? document.location.hash.substr(1) : GexfJS.params.graphFile);
@@ -886,146 +949,24 @@ function GEXFjs(obj) {
 
         console.log("Loading " + url + " in " + (isJson ? "json" : "gexf") + " mode");
         measureTime("Loading graph from network");
-
-        $.ajax({
+        
+        // In the case that this is a string
+        if (typeof GexfJS.params.graphXMLString !== "undefined") {
+          
+          var parser = new DOMParser();
+          var data = parser.parseFromString(GexfJS.params.graphXMLString, "text/xml");
+          parseGEXF(data, GexfJS, false);
+          
+        } else {
+          $.ajax({
             url: url,
             dataType: (isJson ? "json" : "xml"),
             success: function (data) {
-                measureTime("Loading graph from network");
-                measureTime("Pre-processing graph");
-                if (isJson) {
-                    GexfJS.graph = data;
-                    GexfJS.graph.indexOfLabels = GexfJS.graph.nodeList.map(function (_d) {
-                        return _d.l.toLowerCase();
-                    });
-
-                } else {
-                    var _g = $(data).find("graph"),
-                        _nodes = _g.children().filter("nodes").children(),
-                        _edges = _g.children().filter("edges").children();
-                    GexfJS.graph = {
-                        directed: (_g.attr("defaultedgetype") == "directed"),
-                        nodeList: [],
-                        indexOfLabels: [],
-                        edgeList: [],
-                        attributes: {},
-                    };
-                    _xmin = 1e9, _xmax = -1e9, _ymin = 1e9, _ymax = -1e9; _marge = 30;
-                    $(_nodes).each(function () {
-                        var _n = $(this),
-                            _pos = _n.find("viz\\:position,position"),
-                            _x = _pos.attr("x"),
-                            _y = _pos.attr("y");
-                        _xmin = Math.min(_x, _xmin);
-                        _xmax = Math.max(_x, _xmax);
-                        _ymin = Math.min(_y, _ymin);
-                        _ymax = Math.max(_y, _ymax);
-                    });
-
-                    var _scale = Math.min((GexfJS.baseWidth - _marge) / (_xmax - _xmin), (GexfJS.baseHeight - _marge) / (_ymax - _ymin));
-                    var _deltax = (GexfJS.baseWidth - _scale * (_xmin + _xmax)) / 2;
-                    var _deltay = (GexfJS.baseHeight - _scale * (_ymin + _ymax)) / 2;
-                    var nodeIndexById = [];
-
-                    $(_nodes).each(function () {
-                        var _n = $(this),
-                            _id = _n.attr("id"),
-                            _label = _n.attr("label") || _id,
-                            _pos = _n.find("viz\\:position,position"),
-                            _d = {
-                                id: _id,
-                                l: _label,
-                                x: _deltax + _scale * _pos.attr("x"),
-                                y: _deltay - _scale * _pos.attr("y"),
-                                r: _scale * _n.find("viz\\:size,size").attr("value"),
-                            },
-                            _col = _n.find("viz\\:color,color"),
-                            _r = _col.attr("r"),
-                            _g = _col.attr("g"),
-                            _b = _col.attr("b"),
-                            _attr = _n.find("attvalue");
-                        _d.rgb = [_r, _g, _b];
-                        _d.B = "rgba(" + _r + "," + _g + "," + _b + ",.7)";
-                        _d.G = "rgba(" + Math.floor(84 + .33 * _r) + "," + Math.floor(84 + .33 * _g) + "," + Math.floor(84 + .33 * _b) + ",.5)";
-                        _d.a = [];
-                        $(_attr).each(function () {
-                            var _a = $(this),
-                                _for = _a.attr("for");
-                            _d.a.push([
-                                _for ? _for : 'attribute_' + _a.attr("id"),
-                                _a.attr("value")
-                            ]);
-                            GexfJS.graph.attributes[_for] = _for;
-                        });
-                        if (GexfJS.params.sortNodeAttributes) {
-                            _d.a.sort(function (a, b) {
-                                return (a[0] < b[0] ? -1 : (a[0] > b[0] ? 1 : 0));
-                            });
-                        }
-                        GexfJS.graph.nodeList.push(_d);
-                        nodeIndexById.push(_d.id);
-                        GexfJS.graph.indexOfLabels.push(_d.l.toLowerCase());
-                    });
-
-                    $(_edges).each(function () {
-                        var _e = $(this),
-                            _sid = _e.attr("source"),
-                            _six = nodeIndexById.indexOf(_sid),
-                            _tid = _e.attr("target"),
-                            _tix = nodeIndexById.indexOf(_tid),
-                            _w = _e.find('attvalue[for="weight"]').attr('value') || _e.attr('weight'),
-                            _col = _e.find("viz\\:color,color"),
-                            _directed = GexfJS.graph.directed;
-                        if (_e.attr("type") == "directed") {
-                            _directed = true;
-                        }
-                        if (_e.attr("type") == "undirected") {
-                            _directed = false;
-                        }
-                        if (_col.length) {
-                            var _r = _col.attr("r"),
-                                _g = _col.attr("g"),
-                                _b = _col.attr("b");
-                        } else {
-                            var _scol = GexfJS.graph.nodeList[_six].rgb;
-                            if (_directed) {
-                                var _r = _scol[0],
-                                    _g = _scol[1],
-                                    _b = _scol[2];
-                            } else {
-                                var _tcol = GexfJS.graph.nodeList[_tix].rgb,
-                                    _r = Math.floor(.5 * _scol[0] + .5 * _tcol[0]),
-                                    _g = Math.floor(.5 * _scol[1] + .5 * _tcol[1]),
-                                    _b = Math.floor(.5 * _scol[2] + .5 * _tcol[2]);
-                            }
-                        }
-                        GexfJS.graph.edgeList.push({
-                            s: _six,
-                            t: _tix,
-                            W: Math.max(GexfJS.params.minEdgeWidth, Math.min(GexfJS.params.maxEdgeWidth, (_w || 1))) * _scale,
-                            w: parseFloat(_w || 0),
-                            C: "rgba(" + _r + "," + _g + "," + _b + ",.7)",
-                            l: _e.attr("label") || "",
-                            d: _directed
-                        });
-                    });
-                }
-                measureTime("Pre-processing graph");
-
-                GexfJS.ctxMini.clearRect(0, 0, GexfJS.overviewWidth, GexfJS.overviewHeight);
-
-                GexfJS.graph.nodeList.forEach(function (_d) {
-                    GexfJS.ctxMini.fillStyle = _d.B;
-                    GexfJS.ctxMini.beginPath();
-                    GexfJS.ctxMini.arc(_d.x * GexfJS.overviewScale, _d.y * GexfJS.overviewScale, _d.r * GexfJS.overviewScale + 1, 0, Math.PI * 2, true);
-                    GexfJS.ctxMini.closePath();
-                    GexfJS.ctxMini.fill();
-                });
-
-                GexfJS.imageMini = GexfJS.ctxMini.getImageData(0, 0, GexfJS.overviewWidth, GexfJS.overviewHeight);
-                
+              parseGEXF(data, GexfJS, isJson);
             }
         });
+        }
+        
     }
 
     function getNodeFromPos(_coords) {
@@ -1373,28 +1314,7 @@ function GEXFjs(obj) {
             .attr("title", GexfJS.strLang(GexfJS.params.showEdges ? "edgeOff" : "edgeOn"));
     }
 
-    GexfJS.setParams = function setParams(paramlist) {
-        for (var i in paramlist) {
-            GexfJS.params[i] = paramlist[i];
-        }
-    }
-
     $(document).ready(function () {
-
-        var lang = (
-            typeof GexfJS.params.language != "undefined" && GexfJS.params.language
-                ? GexfJS.params.language
-                : (
-                    navigator.language
-                        ? navigator.language.substr(0, 2).toLowerCase()
-                        : (
-                            navigator.userLanguage
-                                ? navigator.userLanguage.substr(0, 2).toLowerCase()
-                                : "en"
-                        )
-                )
-        );
-        GexfJS.lang = (GexfJS.i18n[lang] ? lang : "en");
 
         updateButtonStates();
 
@@ -1561,4 +1481,8 @@ function GEXFjs(obj) {
         GexfJS.setParams(params);
     }
 
-})();
+};
+
+// Creating a new GEXFjs object
+//var GexfJS = new GEXFjs();
+//renderGEXF(GexfJS);
