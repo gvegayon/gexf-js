@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gephi: JavaScript GEXF Viewer</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="../../styles/gexfjs.css" />
+        <link rel="stylesheet" type="text/css" href="../../styles/jquery-ui-1.10.3.custom.min.css" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script type="text/javascript">
+        // Fallback in case JQuery CDN isn't available
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript type='text/javascript' src='js/jquery-2.0.2.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+        <script type="text/javascript" src="../../js/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="../../js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript" src="../../js/gexfjs.js"></script>
+        <script>
+          
+          // Creating the GEXFjs() file
+          var x = new GEXFjs();
+          
+          // Passing the data as a string
+          x.setParams({
+              //graphFile : "miserables.gexf",
+              graphString: '<?xml version="1.0" encoding="UTF-8"?> \
+          <gexf xmlns="http://www.gexf.net/1.1draft" version="1.1" xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.1draft http://www.gexf.net/1.1draft/gexf.xsd"> \
+            <meta lastmodifieddate="2011-09-05"> \
+              <creator>Gephi 0.8</creator>\
+              <description></description>\
+            </meta>\
+            <graph defaultedgetype="undirected" timeformat="double" mode="dynamic">\
+              <attributes class="node" mode="static">\
+                <attribute id="modularity_class" title="Modularity Class" type="integer">\
+                  <default>0</default>\
+                </attribute>\
+              </attributes>\
+              <nodes>\
+              <node id="0" label="Myriel"> \
+                  <attvalues> \
+                    <attvalue for="modularity_class" value="1"></attvalue> \
+                  </attvalues> \
+                  <viz:size value="21.37143"></viz:size> \
+                  <viz:position x="-382.45764" y="147.4245"></viz:position> \
+                  <viz:color r="168" g="168" b="29"></viz:color> \
+                </node> \
+                <node id="2" label="George"> \
+                  <attvalues> \
+                    <attvalue for="modularity_class" value="1"></attvalue> \
+                  </attvalues> \
+                  <viz:size value="10"></viz:size> \
+                  <viz:position x="50.0" y="147.4245"></viz:position> \
+                  <viz:color r="168" g="168" b="29"></viz:color> \
+                </node> \
+                <node id="3" label="Valita"> \
+                  <attvalues> \
+                    <attvalue for="modularity_class" value="1"></attvalue> \
+                  </attvalues> \
+                  <viz:size value="50"></viz:size> \
+                  <viz:position x="10.0" y="20.4245"></viz:position> \
+                  <viz:color r="168" g="168" b="229"></viz:color> \
+                </node> \
+                <node id="1" label="Napoleon"> \
+                  <attvalues> \
+                    <attvalue for="modularity_class" value="1"></attvalue>\
+                  </attvalues>\
+                  <viz:size value="8.0"></viz:size>\
+                  <viz:position x="-486.80704" y="177.66797"></viz:position>\
+                  <viz:color r="168" g="168" b="29"></viz:color>\
+                </node>\
+                </nodes>\
+                <edges>\
+                  <edge source="0" target="1"/>\
+                    </edges>\
+            </graph>\
+          </gexf>'
+          });
+          
+          // Render the graph
+          renderGEXF(x);
+          
+        </script>
+    </head>
+    <body>
+        <div id="zonecentre" class="gradient">
+            <canvas id="carte" width="0" height="0"></canvas>
+            <ul id="ctlzoom">
+                <li>
+                    <a href="#" id="zoomPlusButton" title="S'approcher"> </a>
+                </li>
+                <li id="zoomSliderzone">
+                    <div id="zoomSlider"></div>
+                </li>
+                <li>
+                    <a href="#" id="zoomMinusButton" title="S'éloigner"> </a>
+                </li>
+                <li>
+                    <a href="#" id="lensButton"> </a>
+                </li>
+                <li>
+                    <a href="#" id="edgesButton"> </a>
+                </li>
+            </ul>
+        </div>
+        <div id="overviewzone" class="gradient">
+            <canvas id="overview" width="0" height="0"></canvas>
+        </div>
+        <div id="leftcolumn">
+            <div id="unfold">
+                <a href="#" id="aUnfold" class="rightarrow"> </a>
+            </div>
+            <div id="leftcontent"></div>
+        </div>
+        <div id="titlebar">
+            <div id="maintitle">
+                <h1><a href="http://gephi.org/" target="_blank" title="Made with Gephi">Gephi: JavaScript GEXF Viewer</a></h1>
+            </div>
+            <form id="recherche">
+                <input id="searchinput" class="grey" autocomplete="off" />
+                <input id="searchsubmit" type="submit" />
+            </form>
+        </div>
+        <ul id="autocomplete">
+        </ul>
+    </body>
+</html>

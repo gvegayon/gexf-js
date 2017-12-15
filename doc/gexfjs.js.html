@@ -1,4 +1,32 @@
-/** 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: gexfjs.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: gexfjs.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** 
  * Lead developer: Raphaël Velt
  * Other developers: Jakko Salonen, Tobias Bora, Jan de Mooij
  *
@@ -114,7 +142,7 @@ function parseGEXF(data, obj, isJson) {
           });
           if (obj.params.sortNodeAttributes) {
               _d.a.sort(function (a, b) {
-                  return (a[0] < b[0] ? -1 : (a[0] > b[0] ? 1 : 0));
+                  return (a[0] &lt; b[0] ? -1 : (a[0] > b[0] ? 1 : 0));
               });
           }
           obj.graph.nodeList.push(_d);
@@ -227,7 +255,7 @@ function GEXFjs(obj) {
   
   // Setting default language
   this.lang = (
-    typeof this.params.language != "undefined" && this.params.language
+    typeof this.params.language != "undefined" &amp;&amp; this.params.language
     ? this.params.language
     : (
       navigator.language
@@ -547,29 +575,29 @@ function renderGEXF(GexfJS) {
 
     function replaceURLWithHyperlinks(text) {
         if (GexfJS.params.replaceUrls) {
-            var _urlExp = /(\b(?:https?:\/\/)?[-A-Z0-9]+\.[-A-Z0-9.:]+(?:\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*)?)/ig,
+            var _urlExp = /(\b(?:https?:\/\/)?[-A-Z0-9]+\.[-A-Z0-9.:]+(?:\/[-A-Z0-9+&amp;@#\/%?=~_|!:,.;]*)?)/ig,
                 _protocolExp = /^https?:\/\//i,
                 _res = text.split(_urlExp);
             return _res.map(function (_txt) {
                 if (_txt.match(_urlExp)) {
-                    return $('<a>').attr({
+                    return $('&lt;a>').attr({
                         href: (_protocolExp.test(_txt) ? '' : 'http://') + _txt,
                         target: "_blank"
                     }).text(_txt.replace(_protocolExp, ''));
                 } else {
-                    return $('<span>').text(_txt);
+                    return $('&lt;span>').text(_txt);
                 }
             });
         }
-        return $("<span>").text(text);
+        return $("&lt;span>").text(text);
     }
 
     function displayNode(_nodeIndex, _recentre) {
         GexfJS.params.currentNode = _nodeIndex;
         if (_nodeIndex != -1) {
             var _d = GexfJS.graph.nodeList[_nodeIndex],
-                _html = $('<div>'),
-                _ul = $('<ul>'),
+                _html = $('&lt;div>'),
+                _ul = $('&lt;ul>'),
                 _cG = $("#leftcolumn");
             _cG.animate({
                 "left": "0px"
@@ -579,29 +607,29 @@ function renderGEXF(GexfJS) {
                     left: _cG.width() + "px"
                 });
             });
-            $('<h3>')
-                .append($('<div>').addClass('largepill').css('background', _d.B))
-                .append($('<span>').text(_d.l))
+            $('&lt;h3>')
+                .append($('&lt;div>').addClass('largepill').css('background', _d.B))
+                .append($('&lt;span>').text(_d.l))
                 .appendTo(_html);
-            $('<h4>').text(GexfJS.strLang("nodeAttr")).appendTo(_html);
+            $('&lt;h4>').text(GexfJS.strLang("nodeAttr")).appendTo(_html);
             _ul.appendTo(_html);
             
             var _li, attr, attrkey;
             if (GexfJS.params.showId) {
-                _li = $("<li>");
-                $("<b>").text("id: ").appendTo(_li);
-                $("<span>").text(_d.id).appendTo(_li);
+                _li = $("&lt;li>");
+                $("&lt;b>").text("id: ").appendTo(_li);
+                $("&lt;span>").text(_d.id).appendTo(_li);
                 _li.appendTo(_ul);
             }
             var i, l;
-            for (i = 0, l = _d.a.length; i < l; i++) {
+            for (i = 0, l = _d.a.length; i &lt; l; i++) {
                 attr = _d.a[i];
-                _li = $("<li>");
+                _li = $("&lt;li>");
                 attrkey = GexfJS.graph.attributes[attr[0]];
-                $("<b>").text(GexfJS.strLang(attrkey) + ": ").appendTo(_li);
+                $("&lt;b>").text(GexfJS.strLang(attrkey) + ": ").appendTo(_li);
                 if (attrkey === 'image') {
-                    $('<br>').appendTo(_li);
-                    $('<img>').attr("src", attr[1]).appendTo(_li).addClass("attrimg");
+                    $('&lt;br>').appendTo(_li);
+                    $('&lt;img>').attr("src", attr[1]).appendTo(_li).addClass("attrimg");
                 } else {
                     _li.append(replaceURLWithHyperlinks(attr[1]));
                 }
@@ -614,9 +642,9 @@ function renderGEXF(GexfJS) {
                 var _n, _li;
                 if (_e.t == _nodeIndex) {
                     _n = GexfJS.graph.nodeList[_e.s];
-                    _li = $("<li>");
-                    $("<div>").addClass("smallpill").css("background", _n.B).appendTo(_li);
-                    $("<a>")
+                    _li = $("&lt;li>");
+                    $("&lt;div>").addClass("smallpill").css("background", _n.B).appendTo(_li);
+                    $("&lt;a>")
                         .text(_n.l)
                         .attr("href", "#")
                         .mouseover(function () {
@@ -628,10 +656,10 @@ function renderGEXF(GexfJS) {
                         })
                         .appendTo(_li);
                     if (GexfJS.params.showEdgeLabel) {
-                        $('<span>').text(" – " + _e.l).appendTo(_li);
+                        $('&lt;span>').text(" – " + _e.l).appendTo(_li);
                     }
                     if (GexfJS.params.showEdgeWeight) {
-                        $('<span>').text(" (" + _e.w + ")").appendTo(_li);
+                        $('&lt;span>').text(" (" + _e.w + ")").appendTo(_li);
                     }
                     if (_e.d) {
                         _str_in.push(_li);
@@ -641,9 +669,9 @@ function renderGEXF(GexfJS) {
                 }
                 if (_e.s == _nodeIndex) {
                     _n = GexfJS.graph.nodeList[_e.t];
-                    _li = $("<li>");
-                    $("<div>").addClass("smallpill").css("background", _n.B).appendTo(_li);
-                    $("<a>")
+                    _li = $("&lt;li>");
+                    $("&lt;div>").addClass("smallpill").css("background", _n.B).appendTo(_li);
+                    $("&lt;a>")
                         .text(_n.l)
                         .attr("href", "#")
                         .mouseover(function () {
@@ -655,10 +683,10 @@ function renderGEXF(GexfJS) {
                         })
                         .appendTo(_li);
                     if (GexfJS.params.showEdgeLabel) {
-                        $('<span>').text(" – " + _e.l).appendTo(_li);
+                        $('&lt;span>').text(" – " + _e.l).appendTo(_li);
                     }
                     if (GexfJS.params.showEdgeWeight) {
-                        $('<span>').text(" (" + _e.w + ")").appendTo(_li);
+                        $('&lt;span>').text(" (" + _e.w + ")").appendTo(_li);
                     }
                     if (_e.d) {
                         _str_out.push(_li);
@@ -668,16 +696,16 @@ function renderGEXF(GexfJS) {
                 }
             });
             if (_str_in.length) {
-                $('<h4>').text(GexfJS.strLang("inLinks")).appendTo(_html);
-                $('<ul>').html(_str_in).appendTo(_html);
+                $('&lt;h4>').text(GexfJS.strLang("inLinks")).appendTo(_html);
+                $('&lt;ul>').html(_str_in).appendTo(_html);
             }
             if (_str_out.length) {
-                $('<h4>').text(GexfJS.strLang("outLinks")).appendTo(_html);
-                $('<ul>').html(_str_out).appendTo(_html);
+                $('&lt;h4>').text(GexfJS.strLang("outLinks")).appendTo(_html);
+                $('&lt;ul>').html(_str_out).appendTo(_html);
             }
             if (_str_undir.length) {
-                $('<h4>').text(GexfJS.strLang("undirLinks")).appendTo(_html);
-                $('<ul>').html(_str_undir).appendTo(_html);
+                $('&lt;h4>').text(GexfJS.strLang("undirLinks")).appendTo(_html);
+                $('&lt;ul>').html(_str_undir).appendTo(_html);
             }
             $("#leftcontent").html(_html);
             if (_recentre) {
@@ -705,7 +733,7 @@ function renderGEXF(GexfJS) {
 
         var i;
         for (i in GexfJS.graphZone) {
-            GexfJS.areParamsIdentical = GexfJS.areParamsIdentical && (GexfJS.graphZone[i] == GexfJS.oldGraphZone[i]);
+            GexfJS.areParamsIdentical = GexfJS.areParamsIdentical &amp;&amp; (GexfJS.graphZone[i] == GexfJS.oldGraphZone[i]);
         }
         if (!GexfJS.areParamsIdentical) {
 
@@ -768,7 +796,7 @@ function renderGEXF(GexfJS) {
     }
 
     function onGraphClick(evt) {
-        if (!GexfJS.mouseHasMoved && !GexfJS.pinchOn) {
+        if (!GexfJS.mouseHasMoved &amp;&amp; !GexfJS.pinchOn) {
             displayNode(GexfJS.params.activeNode);
         }
         endMove();
@@ -884,7 +912,7 @@ function renderGEXF(GexfJS) {
           
             var _el, _off, _deltaX, _deltaY;
             
-            if (GexfJS.totalScroll < 0) {
+            if (GexfJS.totalScroll &lt; 0) {
               
                 if (GexfJS.params.zoomLevel > GexfJS.minZoom) {
                     
@@ -903,7 +931,7 @@ function renderGEXF(GexfJS) {
                 
             } else {
               
-                if (GexfJS.params.zoomLevel < GexfJS.maxZoom) {
+                if (GexfJS.params.zoomLevel &lt; GexfJS.maxZoom) {
                     
                     GexfJS.params.zoomLevel++;
                     GexfJS.globalScale = Math.pow(Math.SQRT2, GexfJS.params.zoomLevel);
@@ -997,10 +1025,10 @@ function renderGEXF(GexfJS) {
     function getNodeFromPos(_coords) {
         for (var i = GexfJS.graph.nodeList.length - 1; i >= 0; i--) {
             var _d = GexfJS.graph.nodeList[i];
-            if (_d.visible && _d.withinFrame) {
+            if (_d.visible &amp;&amp; _d.withinFrame) {
                 var _c = _d.actual_coords;
                 _r = Math.sqrt(Math.pow(_c.x - _coords.x, 2) + Math.pow(_c.y - _coords.y, 2));
-                if (_r < _c.r) {
+                if (_r &lt; _c.r) {
                     return i;
                 }
             }
@@ -1016,7 +1044,7 @@ function renderGEXF(GexfJS) {
      */ 
     function calcCoord(x, y, coord) {
         var _r = Math.sqrt(Math.pow(coord.x - x, 2) + Math.pow(coord.y - y, 2));
-        if (_r < GexfJS.lensRadius) {
+        if (_r &lt; GexfJS.lensRadius) {
             var _cos = (coord.x - x) / _r;
             var _sin = (coord.y - y) / _r;
             var _newr = GexfJS.lensRadius * Math.pow(_r / GexfJS.lensRadius, GexfJS.lensGamma);
@@ -1077,7 +1105,7 @@ function renderGEXF(GexfJS) {
             var x2, y2, x3, y3, x4, y4, x5, y5;
             x2 = source.x;
             y2 = source.y;
-            if ((source.x == target.x) && (source.y == target.y)) {
+            if ((source.x == target.x) &amp;&amp; (source.y == target.y)) {
                 x3 = source.x + 2.8 * source.r;
                 y3 = source.y - source.r;
                 x4 = source.x;
@@ -1137,7 +1165,7 @@ function renderGEXF(GexfJS) {
           );
         
         for (var i in GexfJS.params) {
-            _identical = _identical && (GexfJS.params[i] == GexfJS.oldParams[i]);
+            _identical = _identical &amp;&amp; (GexfJS.params[i] == GexfJS.oldParams[i]);
         }
         if (_identical) {
             return;
@@ -1157,7 +1185,7 @@ function renderGEXF(GexfJS) {
 
         GexfJS.ctxGraphe.clearRect(0, 0, GexfJS.graphZone.width, GexfJS.graphZone.height);
 
-        if (GexfJS.params.useLens && GexfJS.mousePosition) {
+        if (GexfJS.params.useLens &amp;&amp; GexfJS.mousePosition) {
             GexfJS.ctxGraphe.fillStyle = "rgba(220,220,250,0.4)";
             GexfJS.ctxGraphe.beginPath();
             GexfJS.ctxGraphe.arc(GexfJS.mousePosition.x, GexfJS.mousePosition.y, GexfJS.lensRadius, 0, Math.PI * 2, true);
@@ -1178,10 +1206,10 @@ function renderGEXF(GexfJS) {
             };
             
             _d.withinFrame = (
-              (_d.actual_coords.x + _d.actual_coords.r > 0) &&
-              (_d.actual_coords.x - _d.actual_coords.r < GexfJS.graphZone.width) &&
-              (_d.actual_coords.y + _d.actual_coords.r > 0) &&
-              (_d.actual_coords.y - _d.actual_coords.r < GexfJS.graphZone.height)
+              (_d.actual_coords.x + _d.actual_coords.r > 0) &amp;&amp;
+              (_d.actual_coords.x - _d.actual_coords.r &lt; GexfJS.graphZone.width) &amp;&amp;
+              (_d.actual_coords.y + _d.actual_coords.r > 0) &amp;&amp;
+              (_d.actual_coords.y - _d.actual_coords.r &lt; GexfJS.graphZone.height)
               );
               
             _d.visible = (GexfJS.params.currentNode == -1 || i == _centralNode || GexfJS.params.showEdges);
@@ -1193,9 +1221,9 @@ function renderGEXF(GexfJS) {
             _tagsMisEnValeur = [_centralNode];
         }
 
-        if (!GexfJS.params.isMoving && (GexfJS.params.showEdges || _centralNode != -1)) {
+        if (!GexfJS.params.isMoving &amp;&amp; (GexfJS.params.showEdges || _centralNode != -1)) {
 
-            var _showAllEdges = (GexfJS.params.showEdges && GexfJS.params.currentNode == -1);
+            var _showAllEdges = (GexfJS.params.showEdges &amp;&amp; GexfJS.params.currentNode == -1);
 
             for (i in GexfJS.graph.edgeList) {
               
@@ -1221,18 +1249,18 @@ function renderGEXF(GexfJS) {
                     }
                 }
 
-                if ((_isLinked || _showAllEdges) && (_ds.withinFrame || _dt.withinFrame) && _ds.visible && _dt.visible) {
+                if ((_isLinked || _showAllEdges) &amp;&amp; (_ds.withinFrame || _dt.withinFrame) &amp;&amp; _ds.visible &amp;&amp; _dt.visible) {
                   
                     GexfJS.ctxGraphe.lineWidth = _edgeSizeFactor * _d.W;
                     
                     _coords = (
-                      (GexfJS.params.useLens && GexfJS.mousePosition) ?
+                      (GexfJS.params.useLens &amp;&amp; GexfJS.mousePosition) ?
                       calcCoord(GexfJS.mousePosition.x, GexfJS.mousePosition.y, _ds.actual_coords) :
                       _ds.actual_coords
                       );
                       
                     _coordt = (
-                      (GexfJS.params.useLens && GexfJS.mousePosition) ?
+                      (GexfJS.params.useLens &amp;&amp; GexfJS.mousePosition) ?
                       calcCoord(
                         GexfJS.mousePosition.x,
                         GexfJS.mousePosition.y,
@@ -1247,7 +1275,7 @@ function renderGEXF(GexfJS) {
                     
                     traceArc(
                       GexfJS.ctxGraphe, _coords, _coordt, _sizeFactor * 3.5,
-                      GexfJS.params.showEdgeArrow && _d.d
+                      GexfJS.params.showEdgeArrow &amp;&amp; _d.d
                       );
                 }
             }
@@ -1262,7 +1290,7 @@ function renderGEXF(GexfJS) {
             _dnc = GexfJS.graph.nodeList[_centralNode];
             
             _dnc.real_coords = (
-              (GexfJS.params.useLens && GexfJS.mousePosition) ?
+              (GexfJS.params.useLens &amp;&amp; GexfJS.mousePosition) ?
               calcCoord(
                 GexfJS.mousePosition.x,
                 GexfJS.mousePosition.y,
@@ -1276,17 +1304,17 @@ function renderGEXF(GexfJS) {
           
             _d = GexfJS.graph.nodeList[i];
             
-            if (_d.visible && _d.withinFrame) {
+            if (_d.visible &amp;&amp; _d.withinFrame) {
                 if (i != _centralNode) {
                   
                     _d.real_coords = (
-                      (GexfJS.params.useLens && GexfJS.mousePosition) ?
+                      (GexfJS.params.useLens &amp;&amp; GexfJS.mousePosition) ?
                       calcCoord(GexfJS.mousePosition.x, GexfJS.mousePosition.y, _d.actual_coords) :
                       _d.actual_coords);
                       
                     _d.isTag = (_tagsMisEnValeur.indexOf(parseInt(i)) != -1);
                     GexfJS.ctxGraphe.beginPath();
-                    GexfJS.ctxGraphe.fillStyle = ((_tagsMisEnValeur.length && !_d.isTag) ? _d.G : _d.B);
+                    GexfJS.ctxGraphe.fillStyle = ((_tagsMisEnValeur.length &amp;&amp; !_d.isTag) ? _d.G : _d.B);
                     GexfJS.ctxGraphe.arc(_d.real_coords.x, _d.real_coords.y, _d.real_coords.r, 0, Math.PI * 2, true);
                     GexfJS.ctxGraphe.closePath();
                     GexfJS.ctxGraphe.fill();
@@ -1298,7 +1326,7 @@ function renderGEXF(GexfJS) {
           
             _d = GexfJS.graph.nodeList[i];
             
-            if (_d.visible && _d.withinFrame) {
+            if (_d.visible &amp;&amp; _d.withinFrame) {
                 if (i != _centralNode) {
                   
                     _fs = _d.real_coords.r * _textSizeFactor;
@@ -1316,8 +1344,8 @@ function renderGEXF(GexfJS) {
                     if (_fs > GexfJS.params.textDisplayThreshold) {
                       
                         GexfJS.ctxGraphe.fillStyle = (
-                          (i != GexfJS.params.activeNode) &&
-                          _tagsMisEnValeur.length &&
+                          (i != GexfJS.params.activeNode) &amp;&amp;
+                          _tagsMisEnValeur.length &amp;&amp;
                           ((!_d.isTag) || (_centralNode != -1)) ?
                           "rgba(60,60,60,0.7)" :
                           "rgb(0,0,0)"
@@ -1382,16 +1410,16 @@ function renderGEXF(GexfJS) {
     function updateAutoComplete(_sender) {
         var _val = $(_sender).val().toLowerCase();
         var _ac = $("#autocomplete");
-        var _acContent = $('<ul>');
+        var _acContent = $('&lt;ul>');
         if (_val != GexfJS.lastAC || _ac.html() == "") {
             GexfJS.lastAC = _val;
             var _n = 0;
             GexfJS.graph.indexOfLabels.forEach(function (_l, i) {
-                if (_n < 30 && _l.search(_val) != -1) {
+                if (_n &lt; 30 &amp;&amp; _l.search(_val) != -1) {
                     var closure_n = _n;
-                    $('<li>')
+                    $('&lt;li>')
                         .attr("id", "liac_" + _n)
-                        .append($('<a>')
+                        .append($('&lt;a>')
                             .mouseover(function () {
                                 changePosAC(closure_n);
                             })
@@ -1407,8 +1435,8 @@ function renderGEXF(GexfJS) {
             });
             GexfJS.autoCompletePosition = 0;
             _ac.html(
-                $('<div>').append(
-                    $('<h4>').text(GexfJS.strLang("nodes"))
+                $('&lt;div>').append(
+                    $('&lt;h4>').text(GexfJS.strLang("nodes"))
                 ).append(_acContent)
             );
         }
@@ -1452,7 +1480,7 @@ function renderGEXF(GexfJS) {
                 var _l = $("#autocomplete li").length;
                 switch (evt.keyCode) {
                     case 40:
-                        if (GexfJS.autoCompletePosition < _l - 1) {
+                        if (GexfJS.autoCompletePosition &lt; _l - 1) {
                             GexfJS.autoCompletePosition++;
                         } else {
                             GexfJS.autoCompletePosition = 0;
@@ -1553,7 +1581,7 @@ function renderGEXF(GexfJS) {
         });
         $("#aUnfold").click(function () {
             var _cG = $("#leftcolumn");
-            if (_cG.offset().left < 0) {
+            if (_cG.offset().left &lt; 0) {
                 _cG.animate({
                     "left": "0px"
                 }, function () {
@@ -1579,7 +1607,7 @@ function renderGEXF(GexfJS) {
     GexfJS.benchmark = function (iteration_count) {
         iteration_count = iteration_count || 10;
         measureTime(iteration_count + " iterations of traceMap()");
-        for (var i = 0; i < iteration_count; i++) {
+        for (var i = 0; i &lt; iteration_count; i++) {
             GexfJS.params.benchmark_iteration = i;
             traceMap();
         }
@@ -1599,4 +1627,26 @@ function renderGEXF(GexfJS) {
 
 // Creating a new GEXFjs object
 //var GexfJS = new GEXFjs();
-//renderGEXF(GexfJS);
+//renderGEXF(GexfJS);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="GEXFjs.html">GEXFjs</a></li></ul><h3>Global</h3><ul><li><a href="global.html#parseGEXF">parseGEXF</a></li><li><a href="global.html#renderGEXF">renderGEXF</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Dec 15 2017 14:36:58 GMT-0800 (PST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

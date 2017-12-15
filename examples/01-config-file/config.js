@@ -4,7 +4,7 @@
 var x = new GEXFjs();
 
 // Pass the path
-x.setParams({graphFile : "miserables.gexf"});
+x.setParams({graphFile : "../data/miserables.gexf"});
 
 // Render the graph
 renderGEXF(x);
