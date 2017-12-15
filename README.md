@@ -4,8 +4,6 @@
 
 ### Known Issues
 
-[Examples](../examples)
-
 **The issue below is the source of 90% of support emails I receive, please read carefully**
 
 Gexf-JS won't work on chrome if launched from your local drive (with a file:/// URI scheme).
