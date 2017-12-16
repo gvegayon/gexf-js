@@ -184,7 +184,20 @@ function parseGEXF(data, obj, isJson) {
 /**
  * Creates a GEXF object.
  * @constructor
- * @param obj An object that can be either empty, or contain the following properties:
+ * @param obj {object} List of parameters.
+ * @classdescription Here goes some nice description on the class
+ * @desc
+ * 
+ * The workflow to use this js library follows: 
+ * 
+ * 1. Create a `GEXFjs` object using the {@link GEXFjs} constructor.
+ * 2. Set either the path to the GEXF file, or a String with a XML using the
+ * {@link setParams} method.
+ * 3. Render the graph using {@link renderGEXF}.
+ * 
+ * You'll need to have the `index.html` and the respective libraries to use this.
+ * See the examples folder for more.
+ * 
  */ 
 function GEXFjs(obj) {
   
@@ -277,7 +290,10 @@ function GEXFjs(obj) {
 
 GEXFjs.prototype = {
     /**
-     * The dictionarys. This is used for the UI
+     * The dictionarys. This is used for the UI. Currently, the following languages
+     * are supported:
+     * 
+     * -  Dutch, English, French, Finnish, German, Greek, Italian, Spanish, and Turkish!
      */ 
     DICTIONARY: {
                 "az": {
@@ -464,6 +480,11 @@ GEXFjs.prototype = {
     
     /**
      * List of default values for the constructor
+     * 
+     * -  `lensRadius`
+     * -  `lensGamma`
+     * -  `graphZone`
+     * 
      */ 
     GEXFjsDefaults: {
             lensRadius: 200,
@@ -496,9 +517,37 @@ GEXFjs.prototype = {
         },
     
     /**
-     * Default parameters
-     * @param {string} graphFile Relative path to a GEXF/JSON file.
-     * @param {string} graphString String containing a GEXF file to be parsed.
+     * Default parameters to be modified by the user
+     * @param graphFile {string} Relative path to a GEXF/JSON file.
+     * @param graphString {string} String containing a GEXF file to be parsed.
+     * @param showEdges  default `true`,
+     * @param useLens  default `false`,
+     * @param zoomLevel  default `0`,
+     * @param curvedEdges  default `true`,
+     * @param edgeWidthFactor  default `1`,
+     * @param minEdgeWidth  default `1`,
+     * @param maxEdgeWidth  default `50`,
+     * @param textDisplayThreshold : `default`,
+     * @param nodeSizeFactor  default `1`,
+     * @param replaceUrls  default `true`,
+     * @param showEdgeWeight  default `true`,
+     * @param showEdgeLabel  default `true`,
+     * @param sortNodeAttributes : `defaultrue`,
+     * @param showId  default `true`,
+     * @param showEdgeArrow  default `true`,
+     * @param language : default `false`,
+     * 
+     * @example
+     * // Creating a GEXF object
+     * var x = new GEXFjs();
+     * x.setParams({
+     *     graphFile: "lesmiserables.gexf",
+     *     curvedEdges: false,
+     *     language: "es"
+     * });
+     * 
+     * // Rendering
+     * renderGXF(x);
      */
     GEXFjsDefaultParams: {
       graphFile : "",
@@ -520,10 +569,22 @@ GEXFjs.prototype = {
       showEdgeArrow : true,
       language: false,
     }
-}
+};
 
 /**
  * Renders a GEXF object
+ * @param GexfJS {object} As created by {@link GEXFjs}
+ * 
+ * @example
+ * // First, we create the GEXF object
+ * var x = new GEXFjs();
+ * 
+ * // Then, we define what we want it to process
+ * x.setParams({graphFile: "miserables.gexf"});
+ * 
+ * // Finally, we render the document
+ * renderGEXF(x);
+ * 
  */
 function renderGEXF(GexfJS) {
   
